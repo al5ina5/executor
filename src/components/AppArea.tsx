@@ -56,10 +56,8 @@ export default function AppArea() {
         let height = mouseY - mouseDownClick.y
 
         // handle small windows and small windows in reverse
-        if (Math.abs(width) < minWidth || Math.abs(height) < minHeight) {
-            width = width < 0 ? -Math.abs(minWidth) : minWidth
-            height = height < 0 ? -Math.abs(minHeight) : minHeight
-        }
+        if (Math.abs(width) < minWidth) width = width < 0 ? -Math.abs(minWidth) : minWidth
+        if (Math.abs(height) < minHeight) height = height < 0 ? -Math.abs(minHeight) : minHeight
         // handles window that open in reverse dirs
         if (width < 0) startX = startX - Math.abs(width)
         if (height < 0) startY = startY - Math.abs(height)
@@ -79,7 +77,7 @@ export default function AppArea() {
 
     return <div id="layout" className='h-full w-full overflow-scroll' onMouseUp={onMouseUp} onMouseDown={onMouseDown}>
 
-        {mouseDownId === 'layout' && <div className='fixed border border-lime-500' style={{
+        {mouseDownId === 'layout' && <div className='fixed border border-lime-500 bg-lime-500 bg-opacity-20' style={{
             ...calculateDragBoxPosition()
         }}></div>}
 

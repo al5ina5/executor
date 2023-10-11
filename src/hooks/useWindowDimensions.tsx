@@ -8,6 +8,8 @@ function useWindowDimensions() {
     });
 
     useEffect(() => {
+        if (typeof window === "undefined") return
+
         function handleResize() {
             setWindowDimensions({
                 width: window.innerWidth,
