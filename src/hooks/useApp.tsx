@@ -7,7 +7,7 @@ export default function useApp() {
     // const [windows, setWindows] = useLocalStorageState('executer_windows', {
     //     defaultValue: []
     // })
-    const [windows, setWindows] = useState(JSON.parse(localStorage.getItem('executer_windows')) || [])
+    const [windows, setWindows] = useState<any>(typeof window !== "undefined" ? JSON.parse(localStorage.getItem('executer_windows') as string) : [])
     const [currentWindowId, setCurrentWindowId] = useState()
 
     useEffect(() => {
