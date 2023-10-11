@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* [=====] THEME [=====] */
+
+
+.font-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 html,
 body {
-    @apply h-full bg-neutral-800 text-lime-500 !font-mono;
+    @apply h-full bg-neutral-800 text-lime-500 font-ubuntu;
 }
 
 @layer utilities {
@@ -19,16 +28,19 @@ body {
     .bg-accent {
         @apply bg-lime-500 text-neutral-800;
     }
+
+    .border-primary {
+        @apply border-neutral-700;
+    }
+
+    .border-accent {
+        @apply border-lime-500;
+    }
 }
 
 input {
     @apply bg-secondary;
 }
-
-.border-primary {
-    @apply border-neutral-700;
-}
-
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {

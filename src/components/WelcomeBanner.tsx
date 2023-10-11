@@ -11,7 +11,7 @@ export default function WelcomeBanner() {
 
     if (!show) return
     return <Portal>
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-secondary bg-opacity-50">
 
             <div className="bg-primary p-6 md:p-12 max-w-xl w-full space-y-6">
                 <img className="w-64" src="/img/executor-logo.png" alt="" />
@@ -22,7 +22,8 @@ export default function WelcomeBanner() {
 
                 <div className="flex">
                     <div className="flex-1" />
-                    <Button onClick={() => setShow(false)}>Test the (Buggy!) Beta</Button></div>
+                    <Button onClick={() => setShow(false)}>Test the (Buggy!) Beta</Button>
+                </div>
             </div>
         </div>
     </Portal>

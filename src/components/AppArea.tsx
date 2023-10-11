@@ -1,5 +1,5 @@
 import useMousePosition from "@/hooks/useMousePosition"
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import Window from "./Window"
 import { AppContext } from "@/context/AppContext"
 import { WindowContext } from "@/context/WindowContext"
@@ -35,8 +35,8 @@ export default function AppArea() {
 
     const onMouseDown = (event) => {
         setMouseDownId(event.target.id)
-        const x = event.clientX;
-        const y = event.clientY;
+        const x = event.pageX;
+        const y = event.pageY;
         setMouseDownClick({ x, y })
     }
 
@@ -46,12 +46,11 @@ export default function AppArea() {
 
     const onMouseUp = (event) => {
         if (mouseDownId !== 'layout') return console.warn(`#${mouseDownId} was clicked instead of #layout.`)
-        let mouseX = event.clientX;
-        let mouseY = event.clientY;
+        let mouseX = event.pageX;
+        let mouseY = event.pageY;
 
         let startX = mouseDownClick.x
         let startY = mouseDownClick.y
-
         let width = mouseX - mouseDownClick.x
         let height = mouseY - mouseDownClick.y
 
@@ -75,16 +74,31 @@ export default function AppArea() {
         setMouseDownId(null);
     }
 
-    return <div id="layout" className='h-full w-full overflow-scroll' onMouseUp={onMouseUp} onMouseDown={onMouseDown}>
+    // const [canvasSize, setCanvasSize] = useState({})
 
-        {mouseDownId === 'layout' && <div className='fixed border border-lime-500 bg-lime-500 bg-opacity-20' style={{
+    // useEffect(() => {
+    //     const farthestX = Math.max(...windows.map(window => window.x + window.width))
+    //     const farthestY = Math.max(...windows.map(window => window.y + window.height))
+    //     const farthestItemDimensions = {
+    //         width: farthestX > window.innerWidth ? farthestX : window.innerWidth,
+    //         height: farthestY > window.innerHeight ? farthestY : window.innerHeight,
+    //     }
+    //     setCanvasSize(current => ({
+    //         width: current.width < farthestItemDimensions.width ? farthestItemDimensions.width : current.width,
+    //         height: current.height < farthestItemDimensions.height ? farthestItemDimensions.height : current.height
+    //     }))
+    // }, [windows])
+
+    return <div id="layout" className='h-full w-full overflow-auto hide-scrollbar' onMouseUp={onMouseUp} onMouseDown={onMouseDown}>
+
+        {mouseDownId === 'layout' && <div className='fixed border border-accent bg-opacity-20' style={{
             ...calculateDragBoxPosition()
         }}></div>}
 
-        {!windows || !windows.length && <div className='fixed inset-0 w-full pointer-events-none flex items-center justify-center'>
-            <p>Click and drag anywhere to get started.</p>
-        </div>}
-
+        <div className="fixed inset-0 w-full pointer-events-none select-none flex flex-col items-center justify-center space-y-6">
+            <img className="w-64 opacity-50" src="/img/executor-logo.png" alt="" />
+            <p className="opacity-50">Click or drag anywhere to get started.</p>
+        </div>
 
         {windows.map((window, index) => (
             <WindowContext.Provider key={window.id} value={{ window, windows, setWindows, setCurrentWindowId, currentWindowId, minWidth, minHeight, index, gridSize, roundToGridSize, removeWindow, duplicateWindow }}>

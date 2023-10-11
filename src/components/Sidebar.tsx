@@ -13,12 +13,12 @@ export default function Sidebar() {
 
     const { windows, setCurrentWindowId, removeWindow, updateWindow, minWidth } = useContext(AppContext)
 
-    return <div className={classNames('fixed top-0 left-0 z-40 space-y-6', showSidebar && 'bg-primary border-r border-primary h-full', showSidebar ? 'pointer-events-auto' : 'pointer-events-none')} style={{ width: `${minWidth + 1}px` }}>
+    return <div className={classNames('fixed top-0 left-0 z-40 space-y-6', showSidebar && 'bg-primary border-r border-primary h-full', showSidebar ? 'pointer-events-auto' : 'pointer-events-none')}>
 
         <button onClick={() => setShowSidebar(_ => !_)} className='p-2 pointer-events-auto'><i className={classNames('fas fa-bars', showSidebar && 'transform rotate-90')} /></button>
 
         {showSidebar &&
-            <div className='overflow-auto h-full'>
+            <div className='overflow-auto h-full' style={{ width: `${minWidth + 1}px` }}>
                 {windows.map((window, index) => <button onClick={() => setCurrentWindowId(window.id)} key={index} className='space-y-1 p-2 group hover text-left hover:bg-secondary w-full border-b border-primary pointer-events-auto'>
                     <div className='flex items-center space-x-2'>
                         <p className='flex-1'>{window.functionName || 'Unknown Function'}</p>
