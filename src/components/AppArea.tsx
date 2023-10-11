@@ -84,7 +84,7 @@ export default function AppArea() {
             ...calculateDragBoxPosition()
         }}></div>}
 
-        {!windows.length && <div className='fixed inset-0 w-full pointer-events-none flex items-center justify-center'>
+        {!windows || !windows.length && <div className='fixed inset-0 w-full pointer-events-none flex items-center justify-center'>
             <p>Click and drag anywhere to get started.</p>
         </div>}
 
