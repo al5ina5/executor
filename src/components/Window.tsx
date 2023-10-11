@@ -79,7 +79,7 @@ export default function Window() {
                         console.log(e.clientX, e.clientY)
                         return copy
                     })
-                }} className='fixed bottom-0 right-0 w-8 h-8 m-2 opacity-5 bg-[url("/img/resize-bottom-right.svg")]'>
+                }} className='fixed -bottom-2 -right-2 w-10 h-10 m-2 opacity-10 bg-[url("/img/resize-bottom-right.svg")]'>
 
                 </button>}
             </div>
