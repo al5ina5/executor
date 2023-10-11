@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 // Custom hook to get window dimensions
 function useWindowDimensions() {
     const [windowDimensions, setWindowDimensions] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: typeof window !== 'undefined' ? window.innerWidth : 0,
+        height: typeof window !== 'undefined' ? window.innerHeight : 0,
     });
 
     useEffect(() => {
@@ -24,7 +24,6 @@ function useWindowDimensions() {
 
         // Clean up the event listener on unmount
         return () => {
-            if (typeof window === 'undefined') return
             window.removeEventListener('resize', handleResize);
         };
     }, []);
