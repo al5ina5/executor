@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withPWA = require('next-pwa')({
+    dest: 'public'
+})
+
+const nextConfig = withPWA({
     compiler: {
         removeConsole: process.env.NODE_ENV === "production"
     },
@@ -11,6 +16,6 @@ const nextConfig = {
         // !! WARN !!
         ignoreBuildErrors: true,
     },
-}
+})
 
 module.exports = nextConfig

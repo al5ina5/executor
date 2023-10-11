@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react"
 import Window from "./Window"
 import { AppContext } from "@/context/AppContext"
 import { WindowContext } from "@/context/WindowContext"
+import { smartStringify } from "@/utils/utils"
 
 
 export default function AppArea() {

@@ -12,9 +12,9 @@ export default function useApp() {
     const [currentWindowId, setCurrentWindowId] = useState()
 
     // Temp logs.
-    useEffect(() => {
-        console.log(`windows`, windows)
-    }, [windows])
+    // useEffect(() => {
+    //     console.log(`windows`, windows)
+    // }, [windows])
 
     // Load windows from storage.
     useEffect(() => {
@@ -35,6 +35,15 @@ export default function useApp() {
 
     const removeWindow = (id) => {
         setWindows(windows => windows.filter(window => window.id !== id))
+    }
+
+    const updateWindow = (newWindowData) => {
+        setWindows(windows => {
+            const findIndex = windows.findIndex(find => find.id === newWindowData.id)
+            const copy = [...windows]
+            copy[findIndex] = { ...windows[findIndex], ...newWindowData }
+            return copy
+        })
     }
 
     const duplicateWindow = (window) => {
@@ -59,5 +68,5 @@ export default function useApp() {
         setCurrentWindowId(id)
     }
 
-    return { windows, setWindows, addWindow, currentWindowId, setCurrentWindowId, removeWindow, duplicateWindow, gridSize, minWidth, minHeight }
+    return { windows, setWindows, addWindow, currentWindowId, setCurrentWindowId, removeWindow, updateWindow, duplicateWindow, gridSize, minWidth, minHeight }
 }

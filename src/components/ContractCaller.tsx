@@ -6,10 +6,12 @@ import useStatusHandler from "@/hooks/useStatusHandler";
 import StatusMessage from "./StatusMessage";
 import { smartStringify } from "@/utils/utils";
 import { WindowContext } from "@/context/WindowContext";
+import { AppContext } from "@/context/AppContext";
 
 export default function ContractCaller() {
 
     const { window, windows, setWindows } = useContext(WindowContext)
+    const { updateWindow } = useContext(AppContext)
     const { connect, address, web3 } = useWeb3Wallet()
 
     const { status, message, errorMessage, updateStatus } = useStatusHandler()
@@ -24,12 +26,7 @@ export default function ContractCaller() {
     const [showMore, setShowMore] = useState(false)
 
     useEffect(() => {
-        setWindows(windows => {
-            const findIndex = windows.findIndex(find => find.id === window.id)
-            const copy = [...windows]
-            copy[findIndex] = { ...windows[findIndex], contractAddress, abi, functionName, functionArguments, results }
-            return copy
-        })
+        updateWindow({ id: window.id, contractAddress, abi, functionName, functionArguments, results })
     }, [contractAddress, abi, functionName, functionArguments, results])
 
     const functionAbi = abi && functionName && JSON.parse(abi) && JSON.parse(abi).find(func => func.name === functionName)

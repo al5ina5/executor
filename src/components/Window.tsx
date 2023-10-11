@@ -3,9 +3,12 @@ import Draggable from "react-draggable"
 import classNames from 'class-names'
 import ContractCaller from "./ContractCaller"
 import { WindowContext } from "@/context/WindowContext"
+import { AppContext } from "@/context/AppContext"
 
 export default function Window() {
     const { window, setWindows, setCurrentWindowId, minWidth, minHeight, currentWindowId, index, gridSize, roundToGridSize, removeWindow, duplicateWindow } = useContext(WindowContext)
+
+    const { updateWindow } = useContext(AppContext)
     const [showContent, setShowContent] = useState(true)
 
 
@@ -35,16 +38,11 @@ export default function Window() {
         <Draggable
             bounds={{ top: 0, left: 0 }}
             handle=".handle"
-            defaultPosition={{ x: window.x, y: window.y }}
+            position={{ x: window.x, y: window.y }}
             grid={[gridSize, gridSize]}
             scale={1}
             onDrag={(e, data) => {
-                setWindows(windows => {
-                    const findIndex = windows.findIndex(find => find.id === window.id)
-                    const copy = [...windows]
-                    copy[findIndex] = { ...windows[findIndex], x: data.x, y: data.y }
-                    return copy
-                })
+                updateWindow({ id: window.id, x: data.x, y: data.y })
             }}
         >
             <div style={{ height: showContent ? window.height + 1 : 'auto', width: window.width + 1, zIndex: isWindowSelected ? 39 : index }}
@@ -71,14 +69,8 @@ export default function Window() {
                     if (newWidth < minWidth) newWidth = minWidth
                     if (newHeight < minHeight) newHeight = minHeight
 
-                    setWindows(windows => {
-                        const findIndex = windows.findIndex(find => find.id === window.id)
-                        const copy = [...windows]
-                        copy[findIndex] = { ...windows[findIndex], width: newWidth, height: newHeight }
-                        // console.log(copy[findIndex])
-                        console.log(e.clientX, e.clientY)
-                        return copy
-                    })
+                    updateWindow({ id: window.id, width: newWidth, height: newHeight })
+
                 }} className='fixed -bottom-2 -right-2 w-10 h-10 m-2 opacity-10 bg-[url("/img/resize-bottom-right.svg")]'>
 
                 </button>}
