@@ -10,7 +10,7 @@ function useWindowDimensions() {
     });
 
     useEffect(() => {
-        if (typeof window === "undefined") return
+        if (typeof window === 'undefined') return
 
         function handleResize() {
             setWindowDimensions({
@@ -24,6 +24,7 @@ function useWindowDimensions() {
 
         // Clean up the event listener on unmount
         return () => {
+            if (typeof window === 'undefined') return
             window.removeEventListener('resize', handleResize);
         };
     }, []);
