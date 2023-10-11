@@ -56,10 +56,8 @@ export default function AppArea() {
 
         // handle small windows and small windows in reverse
         if (Math.abs(width) < minWidth || Math.abs(height) < minHeight) {
-            height = 'auto'
             width = width < 0 ? -Math.abs(minWidth) : minWidth
-            // height = height < 0 ? -Math.abs(minHeight) : minHeight
-            // width = width < 0 ? -Math.abs(minWidth) : minWidth
+            height = height < 0 ? -Math.abs(minHeight) : minHeight
         }
         // handles window that open in reverse dirs
         if (width < 0) startX = startX - Math.abs(width)

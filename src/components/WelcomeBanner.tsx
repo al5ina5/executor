@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Button from "./Button";
 import Portal from "./Portal";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function WelcomeBanner() {
 
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useLocalStorageState('executor-welcome-banner', {
+        defaultValue: true
+    })
 
     if (!show) return
     return <Portal>

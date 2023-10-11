@@ -4,23 +4,25 @@ import useLocalStorageState from "use-local-storage-state";
 
 export default function useApp() {
 
-    // const [windows, setWindows] = useLocalStorageState('executer_windows', {
-    //     defaultValue: []
-    // })
-    const [windows, setWindows] = useState<any>([])
+    const gridSize = 40
+    const minWidth = gridSize * 9
+    const minHeight = gridSize * 7
 
+    const [windows, setWindows] = useState<any>([])
+    const [currentWindowId, setCurrentWindowId] = useState()
+
+    // Temp logs.
+    useEffect(() => {
+        console.log(`windows`, windows)
+    }, [windows])
+
+    // Load windows from storage.
     useEffect(() => {
         const storedWindows = JSON.parse(localStorage.getItem('executer_windows'))
         if (Array.isArray(storedWindows)) setWindows(storedWindows)
     }, [])
 
-
-    useEffect(() => {
-        console.log(`windows`, windows)
-    }, [windows])
-
-    const [currentWindowId, setCurrentWindowId] = useState()
-
+    // Store windows to storage.
     useEffect(() => {
         localStorage.setItem('executer_windows', smartStringify(windows))
     }, [windows])
@@ -34,10 +36,6 @@ export default function useApp() {
     const removeWindow = (id) => {
         setWindows(windows => windows.filter(window => window.id !== id))
     }
-
-    const gridSize = 40
-    const minWidth = gridSize * 9
-    const minHeight = gridSize * 7
 
     const duplicateWindow = (window) => {
         const id = Date.now()
