@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    @apply h-full bg-neutral-800 text-lime-500 !font-mono;
+}
+
+@layer utilities {
+    .bg-primary {
+        @apply bg-neutral-900;
+    }
+
+    .bg-secondary {
+        @apply bg-neutral-800;
+    }
+
+    .bg-accent {
+        @apply bg-lime-500 text-neutral-800;
+    }
+}
+
+input {
+    @apply bg-secondary;
+}
+
+.border-primary {
+    @apply border-neutral-700;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
