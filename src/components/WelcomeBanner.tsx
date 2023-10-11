@@ -22,7 +22,7 @@ export default function WelcomeBanner() {
 
                 <div className="flex">
                     <div className="flex-1" />
-                    <Button onClick={() => setShow(false)}>Get Started</Button></div>
+                    <Button onClick={() => setShow(false)}>Test the (Buggy!) Beta</Button></div>
             </div>
         </div>
     </Portal>
