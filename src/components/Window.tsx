@@ -51,8 +51,8 @@ export default function Window() {
         >
             <div style={{ height: showContent ? temporary.height + 1 : 'auto', width: temporary.width + 1, zIndex: isWindowSelected ? 39 : index }}
                 className={classNames(isWindowSelected ? '' : '', 'absolute border border-primary  rounded-none overflow-hidden flex flex-col select-none')}>
-                <div className={"handle bg-primary p-2 flex items-center gap-2"}>
-                    <div className='flex-1'>
+                <div className={"bg-primary p-2 flex items-center gap-2"}>
+                    <div className='flex-1 handle'>
                         <p className='font-medium text-sm whitespace-nowrap'>{temporary.functionName ? `${temporary.functionName}` : 'New Window'}</p>
                     </div>
                     <button onClick={() => setShowContent(_ => !_)} className={classNames(showContent ? 'opacity-50' : 'opacity-25', ' hover:opacity-100')}>
